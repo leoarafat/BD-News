@@ -28,7 +28,32 @@ const showDetails = (id) =>{
 }
 // display show detail
 const displayDetails = categoryId =>{
+    const placeCard = document.getElementById('card-container')
+    placeCard.innerHTML = '';
     categoryId.forEach(id =>{
         console.log(id)
+        const cardDiv = document.createElement('div')
+        cardDiv.classList.add('col')
+        cardDiv.innerHTML = `
+        <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="${id.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${id.title}</h5>
+        <p class="card-text cards">${id.details}</p>
+        <p class="card-text">
+        <img class="img-fluid img" src="${id.author.img}" alt="">
+        ${id.author.name ? id.author.name : "No found name"}
+        
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+        `
+        placeCard.appendChild(cardDiv)
     })
 }
