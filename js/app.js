@@ -31,7 +31,7 @@ const displayDetails = categoryId =>{
     const placeCard = document.getElementById('card-container')
     placeCard.innerHTML = '';
     categoryId.forEach(id =>{
-        console.log(id)
+        // console.log(id)
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
         cardDiv.innerHTML = `
@@ -44,16 +44,32 @@ const displayDetails = categoryId =>{
       <div class="card-body">
         <h5 class="card-title">${id.title}</h5>
         <p class="card-text cards">${id.details}</p>
-        <p class="card-text">
-        <img class="img-fluid img" src="${id.author.img}" alt="">
-        ${id.author.name ? id.author.name : "No found name"}
-        
-        </p>
+        <div class="d-flex justify-content-around align-items-center">
+       <div> <img class="img-fluid img" src="${id.author.img}" alt="">  ${id.author.name ? id.author.name : "No found name"}</div>
+       <div class=""> 
+      <p>  <p/>
+      <p> <i class="fa-solid fa-eye"></i> ${id.total_view ? id.total_view : 'No data available'}</p>
+       </div>
+       <a onclick="detailModal('${id._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">  <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    
       </div>
     </div>
   </div>
 </div>
         `
         placeCard.appendChild(cardDiv)
+    })
+}
+
+const detailModal = dataId =>{
+    const url = `https://openapi.programming-hero.com/api/news/${dataId}`
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayModal(data.data))
+}
+const displayModal = id =>{
+    id.forEach(newsId =>{
+        console.log(newsId)
     })
 }
