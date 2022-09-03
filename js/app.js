@@ -41,11 +41,15 @@ const showDetails = async(id) =>{
    }
 // display show detail
 const displayDetails = categoryId =>{
+  categoryId.sort((a,b) =>{
+    return b.total_view - a.total_view
+  })
   const showNews = document.getElementById('show-all-news').innerText = categoryId.length? categoryId.length : 'No news'
     const placeCard = document.getElementById('card-container')
     placeCard.innerHTML = '';
     categoryId.forEach(id =>{
         // console.log(id)
+
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
         cardDiv.innerHTML = `
@@ -117,3 +121,4 @@ const loadSpinner = isLoading =>{
     loader.classList.add('d-none')
   }
 }
+
