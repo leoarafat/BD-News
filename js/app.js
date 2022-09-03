@@ -7,12 +7,13 @@ const loadAllData = () =>{
 loadAllData()
 
 const displayAllData = allNews =>{
+  
    const place = document.getElementById('navbar-news')
     allNews.forEach(news =>{
-        // console.log(news)
+     
        const div = document.createElement('div')
        div.innerHTML = `
-       <a onclick="showDetails('${news.category_id}')" class="nav-link" href="#">${news.category_name}</a>
+       <a id="show-all-news-length" onclick="showDetails('${news.category_id}')" class="nav-link" href="#">${news.category_name}</a>
        `   
        place.appendChild(div)
     })
@@ -21,6 +22,7 @@ const displayAllData = allNews =>{
  
 // show details 
 const showDetails = (id) =>{
+  loadSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     fetch(url)
     .then(res => res.json())
@@ -28,6 +30,7 @@ const showDetails = (id) =>{
 }
 // display show detail
 const displayDetails = categoryId =>{
+  const showNews = document.getElementById('show-all-news').innerText = categoryId.length
     const placeCard = document.getElementById('card-container')
     placeCard.innerHTML = '';
     categoryId.forEach(id =>{
@@ -60,6 +63,7 @@ const displayDetails = categoryId =>{
         `
         placeCard.appendChild(cardDiv)
     })
+    loadSpinner(false)
 }
 
 const detailModal = dataId =>{
@@ -86,3 +90,27 @@ const displayModal = id =>{
     })  
 }
 
+//loading spinner
+const loadSpinner = isLoading =>{
+  const loader = document.getElementById('loader')
+  if(isLoading){
+    loader.classList.remove('d-none')
+  }
+  else{
+    loader.classList.add('d-none')
+  }
+}
+
+//bonus mark
+// const displayAllNews = () =>{
+  // const showAll = document.getElementById('show-all-news-length')
+  // const showNews = document.getElementById('show-all-news')
+  // for(const show of showAll.length){
+  //  
+  // }
+  //  
+// 
+// 
+// 
+// }
+// 

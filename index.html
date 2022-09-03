@@ -65,7 +65,7 @@
         </div>
         <div class="div2 col-6 d-flex justify-content-evenly">
             <a class="text-decoration-none" href="#">News</a>
-            <a class="text-decoration-none"  href="#">Blog</a>  
+            <a class="text-decoration-none"  href="blog.html" target="_blank">Blog</a>  
         </div>
     </div>
    </header>
@@ -81,12 +81,21 @@
         </div>
     </section>
     <!--another header end-->
+    <!---loading spinner-->
+<section id="loader" class="d-none">
+  <div style="height:400px ;" class="d-flex justify-content-center align-items-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+</section>  
+<!---loading spinner-->
 
 
     <!-- found section -->
     <section class="my-5">
         <div id="total-found">
-            <h4><span>0</span> items found for category</h4>
+            <h4><span id="show-all-news">0</span> items found for category</h4>
         </div>
     </section>
     <!-- found section -->
@@ -115,15 +124,6 @@
     </section>
     <!-- card section -->
 
-<!---loading spinner-->
-<section id="loader" class="d-none">
-  <div style="height:400px ;" class="d-flex justify-content-center align-items-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-</section>  
-<!---loading spinner-->
 
 
 
