@@ -77,15 +77,12 @@ const displayModal = id =>{
       const modalBody = document.getElementById('modal-body')
       modalBody.innerHTML = ` 
       <img class="img" src="${newsId.author.img}" alt="">
-      <P>${newsId.author.name} </br> ${newsId.author.published_date}
+      <P>${newsId.author.name ? newsId.author.name : 'No found name'} </br> ${newsId.author.published_date}
       <hr>
       <p><i class="fa-solid fa-eye"></i> ${newsId.total_view ? newsId.total_view : 'No data available'} </p>
       <p>${newsId.title}</p>
+      <img class="img-fluid" src="${newsId.thumbnail_url}" alt="">
       `
-      
-
-    })
-     
-     
-    
+    })  
 }
+
