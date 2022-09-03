@@ -1,8 +1,14 @@
-const loadAllData = () =>{
+const loadAllData = async() =>{
     const url = ` https://openapi.programming-hero.com/api/news/categories`
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displayAllData(data.data.news_category))
+    try{
+      const res = await fetch(url)
+      const data = await res.json()
+      displayAllData(data.data.news_category)
+    }
+    catch (error){
+      alert('Something Went Wrong')
+    }
+   
 }
 loadAllData()
 
@@ -21,16 +27,21 @@ const displayAllData = allNews =>{
 }
  
 // show details 
-const showDetails = (id) =>{
+const showDetails = async(id) =>{
   loadSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displayDetails(data.data))
-}
+    try{
+      const res = await fetch(url)
+      const data = await res.json()
+      displayDetails(data.data)
+    }
+    catch (error){
+      alert('Something wrong')
+    }
+   }
 // display show detail
 const displayDetails = categoryId =>{
-  const showNews = document.getElementById('show-all-news').innerText = categoryId.length
+  const showNews = document.getElementById('show-all-news').innerText = categoryId.length? categoryId.length : 'No news'
     const placeCard = document.getElementById('card-container')
     placeCard.innerHTML = '';
     categoryId.forEach(id =>{
@@ -38,10 +49,10 @@ const displayDetails = categoryId =>{
         const cardDiv = document.createElement('div')
         cardDiv.classList.add('col')
         cardDiv.innerHTML = `
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3 onclick="detailModal('${id._id}')" data-bs-toggle="modal"data-bs-target="#exampleModal"" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="${id.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+      <img src="${id.thumbnail_url}" class="img-fluid rounded-start" alt="">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -53,9 +64,8 @@ const displayDetails = categoryId =>{
       <p>  <p/>
       <p> <i class="fa-solid fa-eye"></i> ${id.total_view ? id.total_view : 'No data available'}</p>
        </div>
-       <a onclick="detailModal('${id._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">  <i class="fa-solid fa-arrow-right"></i></a>
+       <a onclick="detailModal('${id._id}')" data-bs-toggle="modal"data-bs-target="#exampleModal">  <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-    
       </div>
     </div>
   </div>
@@ -66,11 +76,18 @@ const displayDetails = categoryId =>{
     loadSpinner(false)
 }
 
-const detailModal = dataId =>{
+const detailModal = async (dataId) =>{
     const url = `https://openapi.programming-hero.com/api/news/${dataId}`
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displayModal(data.data))
+    try{
+      const res = await fetch(url)
+      const data = await res.json()
+      displayModal(data.data)
+    }
+    catch (error){
+      alert('Something went wrong')
+    }
+    
+    
 }
 const displayModal = id =>{
    
@@ -100,17 +117,3 @@ const loadSpinner = isLoading =>{
     loader.classList.add('d-none')
   }
 }
-
-//bonus mark
-// const displayAllNews = () =>{
-  // const showAll = document.getElementById('show-all-news-length')
-  // const showNews = document.getElementById('show-all-news')
-  // for(const show of showAll.length){
-  //  
-  // }
-  //  
-// 
-// 
-// 
-// }
-// 
